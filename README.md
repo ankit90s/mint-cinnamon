@@ -1,1 +1,1 @@
-# mint-cinnamon
+# mint-xfce
