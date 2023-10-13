@@ -12,7 +12,7 @@ clear
 echo -e "\e[1;32m Refreshing Repositories \e[0m"
 apt update && apt upgrade -y
 apt install -y aptitude
-apt install -y nala
+#apt install -y nala
 
 # Get username
 username=$(id -u -n 1000)
@@ -20,7 +20,7 @@ builddr=$(pwd)
 
 # remove not required packages
 echo -e "\e[1;32m Remove not required packages \e[0m"
-aptitude -y remove hypnotix celluloid rhythmbox pix catfish redshift-gtk warpinator drawing hexchat thunderbird mintwelcome mintupdate mintbackup
+apt purge -y hypnotix celluloid rhythmbox pix catfish redshift-gtk warpinator drawing hexchat thunderbird
 
 # System Monitors
 echo -e "\e[1;32m Installing conky nefetch htop \e[0m"
@@ -30,24 +30,34 @@ apt install -y conky neofetch htop
 echo -e "\e[1;32m Installing download managers \e[0m"
 apt install -y curl wget axel aria2
 
-# redshift
-echo -e "\e[1;32m Installing redshift \e[0m"
-apt install -y redshift
+# redshift and exa
+echo -e "\e[1;32m Installing redshift and exa \e[0m"
+apt install -y redshift exa
+
+# translate shell
+echo -e "\e[1;32m Installing translate shell \e[0m"
+apt install -y translate-shell
+
+# clipboard
+echo -e "\e[1;32m Intalling clipboard \e[0m"
+apt install -y diodon
 
 # Text editor
 echo -e "\e[1;32m Installing geany, micro and neovim \e[0m"
 apt install -y geany micro neovim
-git clone https://github.com/VundleVim/Vundle.vim.git /home/$username/.vim/bundle/Vundle.vim
+# git clone https://github.com/VundleVim/Vundle.vim.git /home/$username/.vim/bundle/Vundle.vim
 
 # Media Player
-apt install -y mpv
+apt install -y mpv mpv-mpris
 
 # kdeconnect
 apt install -y kdeconnect
 
 # terminal of choice
 echo -e "\e[1;32m Installing terminal \e[0m"
-apt install -y kitty
+add-apt-repository -y ppa:aslatter/ppa
+apt update
+apt install -y alacritty
 
 # libreoffice install
 echo -e "\e[1;32m Installing libreoffice and its themes \e[0m"
@@ -96,7 +106,6 @@ rm -rf pfetch
 echo -e "\e[1;32m Copying config files \e[0m"
 cd /home/$username
 git clone https://github.com/ankit90s/dotconfig && cd dotconfig
-cp -r * /home/$username/.config
 chown -R $username:$username /home/$username
 cd $builddr
 
